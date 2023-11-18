@@ -1,23 +1,47 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+import { ref } from 'vue'
+
+const drawer = ref(false)
+</script>
+
+<script lang="ts">
+export default {
+  data: () => ({ drawer: false }),
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer">
+      <!--  -->
+    </v-navigation-drawer>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <v-app-bar>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+      <v-app-bar-title>CodingJosh's Anime Stats</v-app-bar-title>
+    </v-app-bar>
 
-  <RouterView />
+    <v-main>
+      <header>
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+
+        <div class="wrapper">
+          <HelloWorld msg="You did it!" />
+
+          <nav>
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/about">About</RouterLink>
+          </nav>
+        </div>
+      </header>
+
+      <RouterView />
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped>
