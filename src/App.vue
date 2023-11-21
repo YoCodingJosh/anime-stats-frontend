@@ -37,20 +37,25 @@ export default {
     </v-main>
 
     <v-footer app border>
-      <span>
-        &copy; {{ new Date().getFullYear() }} CodingJosh
-        &mdash;
-        Privacy Policy
-        &bull;
-        Terms of Service
-      </span>
+      <v-row justify="center" no-gutters>
+        <v-col class="text-center">
+          <router-link to="/privacy">Privacy Policy</router-link>
+          &bull;
+          <router-link to="/terms">Terms of Service</router-link>
+        </v-col>
+        <v-col class="text-center mt-4" cols="12">
+          &copy; {{ new Date().getFullYear() }} CodingJosh
+        </v-col>
+      </v-row>
     </v-footer>
   </v-app>
 </template>
 
 <style scoped>
 .v-list-item--active {
-  color: white !important; /* Change this to whatever color you want */
-  background-color: deep-purple !important; /* Change this to whatever color you want */
+  color: white !important;
+  /* Change this to whatever color you want */
+  background-color: deep-purple !important;
+  /* Change this to whatever color you want */
 }
 </style>
