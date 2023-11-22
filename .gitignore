@@ -29,3 +29,5 @@ coverage
 
 # Cloudflare Wrangler
 .wrangler
+
+.env
