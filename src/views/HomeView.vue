@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { ref } from 'vue'
+import type { Router } from 'vue-router';
+import { useUserDataStore } from '../stores/userData';
 
 const username = ref('');
+const isSubmitted = ref(false);
+
+const userDataStore = useUserDataStore();
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL as string;
 
@@ -17,7 +23,23 @@ const healthCheck = async () => {
   }
 }
 
-healthCheck();
+onMounted(async () => {
+  await healthCheck();
+});
+
+const start = (router: Router) => {
+  isSubmitted.value = true;
+
+  if (username.value === '') {
+    return;
+  }
+
+  isSubmitted.value = false;
+
+  userDataStore.setUsername(username.value);
+
+  router.push(`/process`);
+};
 </script>
 
 <template>
@@ -42,9 +64,11 @@ healthCheck();
           </template>
 
           <template v-slot:text>
-            <v-text-field v-model="username" label="Username" outlined dense placeholder="CodingJosh"></v-text-field>
+            <p v-if="isSubmitted && username === ''" class="mb-4 text-red-lighten-1">Please enter a username</p>
+            <v-text-field v-model="username" label="Username" outlined dense placeholder="CodingJosh"
+              aria-required="true"></v-text-field>
             <v-btn block class="text-none mb-4" color="indigo-darken-1" size="x-large" variant="flat"
-              @click="() => $router.push(`/user/${username}`)">Go</v-btn>
+              @click="() => start($router)">Go</v-btn>
           </template>
         </v-card>
       </div>
