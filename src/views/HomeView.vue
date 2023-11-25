@@ -1,15 +1,22 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { ref } from 'vue'
-import type { Router } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useUserDataStore } from '../stores/userData';
 
 const username = ref('');
 const isSubmitted = ref(false);
+const loading = ref(false);
+const error = ref(null as string | null);
 
+const router = useRouter();
 const userDataStore = useUserDataStore();
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL as string;
+
+const rules = [
+  (v: string) => !!v || 'Username is required',
+];
 
 const healthCheck = async () => {
   try {
@@ -27,16 +34,57 @@ onMounted(async () => {
   await healthCheck();
 });
 
-const start = (router: Router) => {
+interface BasicInfoError {
+  message: string;
+  ok: boolean;
+}
+
+interface BasicInfoResponse {
+  data: {
+    username: string;
+    mal_id: number;
+    userUrl: string;
+    images: {
+      jpg: {
+        image_url: string;
+      },
+      webp: {
+        image_url: string;
+      }
+    };
+    joined: string;
+  }
+}
+
+const start = async () => {
+  error.value = null;
   isSubmitted.value = true;
 
   if (username.value === '') {
     return;
   }
 
-  isSubmitted.value = false;
+  loading.value = true;
 
-  userDataStore.setUsername(username.value);
+  // get the user's basic info first, this will also check if the user exists
+  const response = await fetch(`${backendUrl}/api/${username.value}`);
+  const data: BasicInfoResponse | BasicInfoError = await response.json();
+
+  if ('ok' in data && !data.ok) {
+    error.value = data.message;
+    loading.value = false;
+
+    return;
+  }
+
+  const userData = data as BasicInfoResponse;
+
+  userDataStore.setUsername(userData.data.username);
+  userDataStore.setUserId(userData.data.mal_id);
+  userDataStore.setJoinedDate(userData.data.joined);
+  userDataStore.setProfilePictureUrl(userData.data.images.webp.image_url); // doesn't matter since both webp and jpg are the same
+
+  userDataStore.setFetchedTimestamp(Math.floor(Date.now() / 1000));
 
   router.push(`/process`);
 };
@@ -64,11 +112,18 @@ const start = (router: Router) => {
           </template>
 
           <template v-slot:text>
-            <p v-if="isSubmitted && username === ''" class="mb-4 text-red-lighten-1">Please enter a username</p>
-            <v-text-field v-model="username" label="Username" outlined dense placeholder="CodingJosh"
-              aria-required="true"></v-text-field>
-            <v-btn block class="text-none mb-4" color="indigo-darken-1" size="x-large" variant="flat"
-              @click="() => start($router)">Go</v-btn>
+            <v-form @submit.prevent>
+              <p v-if="isSubmitted && error" class="mb-4 text-red-lighten-1">{{ error }}</p>
+              <v-text-field v-model="username" label="MyAnimeList Username" outlined dense placeholder="CodingJosh"
+                :rules="rules"></v-text-field>
+              <v-btn type="submit" block class="mt-2" color="indigo-darken-1" size="x-large" variant="flat"
+                :disabled="loading" @click="async () => start()">
+                <span v-if="loading">
+                  <v-progress-circular indeterminate color="white"></v-progress-circular>
+                </span>
+                <span v-else>Go</span>
+              </v-btn>
+            </v-form>
           </template>
         </v-card>
       </div>

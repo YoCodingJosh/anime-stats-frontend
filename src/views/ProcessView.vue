@@ -14,13 +14,20 @@ onMounted(async () => {
     return;
   }
 
-  // await userDataStore.fetch();
+  fetch(`${import.meta.env.VITE_BACKEND_URL}/api/${userDataStore.username}/raw-data`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 });
 </script>
 
 <template>
   <v-container>
-    <p>yo {{ userDataStore.username }}</p>
+    <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
+    <p>{{ userDataStore.username }}</p>
+    <h1>Processing data...</h1>
+    <v-progress-circular indeterminate></v-progress-circular>
   </v-container>
 </template>
 
