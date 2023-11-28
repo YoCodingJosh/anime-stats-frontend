@@ -82,7 +82,7 @@ const start = async () => {
   userDataStore.setUsername(userData.data.username);
   userDataStore.setUserId(userData.data.mal_id);
   userDataStore.setJoinedDate(userData.data.joined);
-  userDataStore.setProfilePictureUrl(userData.data.images.webp.image_url); // doesn't matter since both webp and jpg are the same
+  userDataStore.setProfilePictureUrl(userData.data.images.jpg.image_url ?? "https://cdn.myanimelist.net/images/kaomoji_mal_white.png");
 
   userDataStore.setFetchedTimestamp(Math.floor(Date.now() / 1000));
 
