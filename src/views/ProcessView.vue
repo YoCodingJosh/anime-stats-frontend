@@ -23,11 +23,19 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container>
-    <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
-    <p>{{ userDataStore.username }}</p>
-    <h1>Processing data...</h1>
-    <v-progress-circular indeterminate></v-progress-circular>
+  <v-container fill-height>
+    <v-row align="center" justify="center">
+      <v-col></v-col>
+      <v-col>
+        <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
+        <p>{{ userDataStore.username }}</p>
+        <div class="d-flex flex-column justify-center align-center">
+          <h1 class="my-3">Processing data...</h1>
+          <v-progress-circular indeterminate></v-progress-circular>
+        </div>
+      </v-col>
+      <v-col></v-col>
+    </v-row>
   </v-container>
 </template>
 
