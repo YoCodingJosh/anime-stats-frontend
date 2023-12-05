@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useUserDataStore } from '@/stores/userData';
 
 const userDataStore = useUserDataStore();
 const router = useRouter();
+
+const isLoading = ref(true);
+const isUserListPrivate = ref(false);
 
 onMounted(async () => {
   if (!userDataStore.username) {
@@ -15,9 +18,20 @@ onMounted(async () => {
   }
 
   fetch(`${import.meta.env.VITE_BACKEND_URL}/api/${userDataStore.username}/raw-data`)
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        if (response.status === 403) {
+          isLoading.value = false;
+          isUserListPrivate.value = true;
+        } else {
+          throw new Error('Something went wrong');
+        }
+      }
+      return response.json();
+    })
     .then((data) => {
       console.log(data);
+      isLoading.value = false;
     });
 });
 </script>
@@ -29,9 +43,17 @@ onMounted(async () => {
       <v-col>
         <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
         <p>{{ userDataStore.username }}</p>
-        <div class="d-flex flex-column justify-center align-center">
+        <div v-if="isLoading" class="d-flex flex-column justify-center align-center">
           <h1 class="my-3">Processing data...</h1>
           <v-progress-circular indeterminate></v-progress-circular>
+        </div>
+        <div v-else-if="isUserListPrivate" class="d-flex flex-column justify-center align-center">
+          <h1 class="my-3">User list is private</h1>
+          <p>Change your list privacy settings to public and try again</p>
+          <v-btn class="my-6" color="primary" @click="router.push('/')">Go back</v-btn>
+        </div>
+        <div v-else>
+          <h1 class="my-3">TODO:</h1>
         </div>
       </v-col>
       <v-col></v-col>
