@@ -1,0 +1,82 @@
+{
+  "gifs": [
+      {
+        "name": "bocchi-glitch",
+        "file": "bocchi-the-rock-hitori-gotoh.gif",
+        "mal_id": 47917,
+        "width": 498,
+        "height": 280,
+        "applicable_to": [
+          "all_errors"
+        ]
+      },
+      {
+        "name": "bocchi-trash",
+        "file": "bocchi-trash-bocchi-the-rock.gif",
+        "mal_id": 47917,
+        "width": 325,
+        "height": 498,
+        "applicable_to": [
+          "system_error"
+        ]
+      },
+      {
+        "name": "komari-angry",
+        "file": "hikikomari-neet-vampire-princess.gif",
+        "mal_id": 54103,
+        "width": 498,
+        "height": 281,
+        "applicable_to": [
+          "list_private"
+        ]
+      },
+      {
+        "name": "yuyushiki-door",
+        "file": "yuyushiki-door.gif",
+        "mal_id": 15911,
+        "width": 498,
+        "height": 280,
+        "applicable_to": [
+          "list_private"
+        ]
+      },
+      {
+        "name": "yuyushiki-what",
+        "file": "what-yuyushiki.gif",
+        "mal_id": 15911,
+        "width": 498,
+        "height": 346,
+        "applicable_to": [
+          "system_error"
+        ]
+      },
+      {
+        "name": "shamiko-jump",
+        "file": "machikado-mazoku-shamiko.gif",
+        "mal_id": 15911,
+        "width": 401,
+        "height": 498,
+        "applicable_to": [
+          "all_errors"
+        ]
+      }
+  ],
+  "anime_details": {
+    "47917": {
+      "title": "Bocchi the Rock!",
+      "link_to_watch": "https://www.crunchyroll.com/series/GXJHM3P19/bocchi-the-rock"
+    },
+    "54103": {
+      "title": "The Vexations of a Shut-In Vampire Princess",
+      "link_to_watch": "https://www.hidive.com/tv/the-vexations-of-a-shut-in-vampire-princess"
+    },
+    "15911": {
+      "title": "Yuyushiki",
+      "link_to_watch": "https://www.hidive.com/tv/yuyushiki"
+    },
+    "39071": {
+      "title": "The Demon Girl Next Door",
+      "link_to_watch": "https://www.hidive.com/tv/the-demon-girl-next-door"
+    }
+  }
+}

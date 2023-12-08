@@ -4,6 +4,8 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { useUserDataStore } from '../stores/userData';
 
+import AnimeGif from '@/components/AnimeGif.vue';
+
 const username = ref('');
 const isSubmitted = ref(false);
 const loading = ref(false);
@@ -100,6 +102,7 @@ const start = async () => {
         This is the home page. You can edit the content of this page by editing
         <code>src/views/HomeView.vue</code>.
       </p>
+      <anime-gif image-key="yuyushiki-what"></anime-gif>
       <br />
       <div class="d-flex align-center flex-column">
         <v-card width="450">
