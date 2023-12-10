@@ -1,18 +1,30 @@
-import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+import '@mdi/font/css/materialdesignicons.css';
 
-import type { App } from 'vue'
-import { createVuetify } from 'vuetify'
+import type { App } from 'vue';
+import { createVuetify } from 'vuetify';
 
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
 
 export function installVuetify(app: App) {
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+  if (!localStorage.getItem('theme')) {
+    localStorage.setItem('theme', 'system');
+  };
+
+  const startupTheme = localStorage.getItem('theme') === 'system' ? systemTheme : localStorage.getItem('theme') || 'light';
+
   const vuetify = createVuetify({
     components,
     directives,
     icons: {
-      defaultSet: 'mdi', // This is already the default value - only for display purposes
+      defaultSet: 'mdi',
     },
-  })
-  app.use(vuetify)
+    theme: {
+      defaultTheme: startupTheme,
+    },
+  });
+
+  app.use(vuetify);
 }
