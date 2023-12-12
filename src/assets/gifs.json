@@ -64,19 +64,23 @@
   "anime_details": {
     "47917": {
       "title": "Bocchi the Rock!",
-      "link_to_watch": "https://www.crunchyroll.com/series/GXJHM3P19/bocchi-the-rock"
+      "link_to_watch": "https://www.crunchyroll.com/series/GXJHM3P19/bocchi-the-rock",
+      "copyright": "Aki Hamaji / Houbunsha / Aniplex"
     },
     "54103": {
       "title": "The Vexations of a Shut-In Vampire Princess",
-      "link_to_watch": "https://www.hidive.com/tv/the-vexations-of-a-shut-in-vampire-princess"
+      "link_to_watch": "https://www.hidive.com/tv/the-vexations-of-a-shut-in-vampire-princess",
+      "copyright": "Kotei Kobayashi / SB Creative Corp. / Shut-In Vampire Princess Committee"
     },
     "15911": {
       "title": "Yuyushiki",
-      "link_to_watch": "https://www.hidive.com/tv/yuyushiki"
+      "link_to_watch": "https://www.hidive.com/tv/yuyushiki",
+      "copyright": "Komata Mikami / Houbunsha / Yuyushiki Data Processing Club"
     },
     "39071": {
       "title": "The Demon Girl Next Door",
-      "link_to_watch": "https://www.hidive.com/tv/the-demon-girl-next-door"
+      "link_to_watch": "https://www.hidive.com/tv/the-demon-girl-next-door",
+      "copyright": "Izumo Ito / Houbunsha / Machikado Mazoku Production Committee"
     }
   }
 }

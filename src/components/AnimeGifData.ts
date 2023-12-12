@@ -10,6 +10,7 @@ export interface Gif {
 export interface AnimeDetail {
   title: string;
   link_to_watch: string;
+  copyright: string;
 }
 
 export default interface GifsJson {
