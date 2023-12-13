@@ -72,6 +72,8 @@ const animeGenres = ref<string[]>([]);
 const animeScore = ref(0);
 const animeImageUrl = ref('');
 
+const isLoading = ref(true);
+
 onMounted(() => {
   if (props.imageKey && props.applicableTag) {
     throw new Error('Cannot use both imageKey and applicableTag');
@@ -126,6 +128,8 @@ onMounted(() => {
         animeGenres.value = [...cachedAnimeData.genres, ...cachedAnimeData.themes];
         animeImageUrl.value = cachedAnimeData.animeImageUrl;
       }
+
+      isLoading.value = false;
     } else {
       fetch(`https://api.jikan.moe/v4/anime/${animeMalId.value}`)
         .then((response) => response.json())
@@ -151,13 +155,15 @@ onMounted(() => {
             fetchedTimestamp: Math.floor(Date.now() / 1000),
           });
         });
+
+      isLoading.value = false;
     }
   }
 });
 </script>
 
 <template>
-  <v-card :max-width="imageWidth">
+  <v-card :max-width="imageWidth" :loading="isLoading">
     <v-img :src="`/gifs/${imageUrl}`" :max-width="imageWidth" :max-height="imageHeight"></v-img>
     <v-card-title>
       <v-row>
