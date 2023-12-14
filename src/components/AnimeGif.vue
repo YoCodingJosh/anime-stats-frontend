@@ -168,11 +168,12 @@ onMounted(() => {
     <v-card-title>
       <v-row>
         <v-col cols="9">
-          <a :href="animeMalUrl" target="_blank" rel="noopener noreferrer">{{ animeTitle }}</a>
+          <a :href="animeMalUrl" class="anime-title" target="_blank" rel="noopener noreferrer">{{ animeTitle }}</a>
         </v-col>
         <v-col class="d-flex" cols="3">
           <v-spacer />
-          {{ animeScore }} <v-icon>mdi-star</v-icon>
+          <span class="anime-score">{{ animeScore }}</span>
+          <v-icon>mdi-star</v-icon>
         </v-col>
       </v-row>
     </v-card-title>
