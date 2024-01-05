@@ -163,7 +163,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-card :max-width="imageWidth" :loading="isLoading">
+  <v-card :max-width="imageWidth" :loading="isLoading" class="anime-gif-card">
     <v-img :src="`/gifs/${imageUrl}`" :max-width="imageWidth" :max-height="imageHeight"></v-img>
     <v-card-title>
       <v-row>
@@ -200,4 +200,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.anime-gif-card {
+  padding-bottom: 5px;
+}
 </style>

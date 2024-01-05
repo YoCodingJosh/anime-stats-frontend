@@ -4,6 +4,8 @@ import { useRouter } from 'vue-router';
 
 import { useUserDataStore } from '@/stores/userData';
 
+import AnimeGif from '@/components/AnimeGif.vue';
+
 const userDataStore = useUserDataStore();
 const router = useRouter();
 
@@ -54,6 +56,7 @@ onMounted(async () => {
         </div>
         <div v-else>
           <h1 class="my-3">TODO:</h1>
+          <anime-gif image-key="yuyushiki-what"></anime-gif>
         </div>
       </v-col>
       <v-col></v-col>
