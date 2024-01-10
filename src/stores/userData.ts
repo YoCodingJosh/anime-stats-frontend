@@ -44,7 +44,6 @@ export const useUserDataStore = defineStore('userData', () => {
     return diffSeconds;
   });
 
-
   return {
     username,
     setUsername,

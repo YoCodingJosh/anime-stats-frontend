@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { useUserDataStore } from '../stores/userData';
+import { useAppStateStore } from '../stores/appState';
 
 const username = ref('');
 const isSubmitted = ref(false);
@@ -11,28 +11,13 @@ const error = ref(null as string | null);
 
 const router = useRouter();
 const userDataStore = useUserDataStore();
+const appStateStore = useAppStateStore();
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL as string;
 
 const rules = [
   (v: string) => !!v || 'Username is required',
 ];
-
-const healthCheck = async () => {
-  try {
-    const response = await fetch(`${backendUrl}/health`);
-    if (response.status !== 200) {
-      throw new Error('Backend is down');
-    }
-  } catch (error) {
-    console.error(error);
-    // TODO: Show error message
-  }
-}
-
-onMounted(async () => {
-  await healthCheck();
-});
 
 interface BasicInfoError {
   message: string;
@@ -96,11 +81,7 @@ const start = async () => {
       <h1>Welcome!</h1>
     </header>
     <main>
-      <p>
-        This is the home page. You can edit the content of this page by editing
-        <code>src/views/HomeView.vue</code>.
-      </p>
-      <br />
+      <v-alert v-if="appStateStore.shouldShowAlertForSystemStatus" :text="appStateStore.systemStatus" type="error"></v-alert>
       <div class="d-flex align-center flex-column">
         <v-card width="450">
           <template v-slot:title>

@@ -5,6 +5,36 @@ import { ref } from 'vue';
 import { RouterView } from 'vue-router';
 import { useTheme } from 'vuetify';
 
+import { useAppStateStore } from './stores/appState';
+
+const appState = useAppStateStore();
+
+const backendUrl = import.meta.env.VITE_BACKEND_URL as string;
+
+const healthCheck = async () => {
+  try {
+    const response = await fetch(`${backendUrl}/health`);
+
+    if (response.status !== 200) {
+      appState.setBackendAvailable(false);
+
+      return;
+    }
+
+    const data = await response.json();
+
+    if (!data.ok) {
+      appState.setBackendAvailable(true); // the backend is up, but mal is down
+      appState.setMalAvailable(false);
+    } else {
+      appState.setMalAvailable(true);
+    }
+  } catch (error) {
+    // if there's any error, assume the backend is down
+    appState.setBackendAvailable(false);
+  }
+}
+
 const theme = useTheme();
 
 const drawer = ref(false);
@@ -48,8 +78,10 @@ function uninstallThemeWatcher() {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   installThemeWatcher();
+
+  await healthCheck();
 });
 
 onUnmounted(() => {
