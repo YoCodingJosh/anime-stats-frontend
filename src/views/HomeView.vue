@@ -81,7 +81,7 @@ const start = async () => {
       <h1>Welcome!</h1>
     </header>
     <main>
-      <v-alert v-if="appStateStore.shouldShowAlertForSystemStatus" :text="appStateStore.systemStatus" type="error"></v-alert>
+      <v-alert v-if="!appStateStore.isSystemOperational" :text="appStateStore.systemStatus" type="error"></v-alert>
       <div class="d-flex align-center flex-column">
         <v-card width="450">
           <template v-slot:title>
@@ -98,7 +98,7 @@ const start = async () => {
               <v-text-field v-model="username" label="MyAnimeList Username" outlined dense placeholder="CodingJosh"
                 :rules="rules"></v-text-field>
               <v-btn type="submit" block class="mt-2" color="indigo-darken-1" size="x-large" variant="flat"
-                :disabled="loading" @click="async () => start()">
+                :disabled="loading || !appStateStore.isSystemOperational" @click="async () => start()">
                 <span v-if="loading">
                   <v-progress-circular indeterminate color="white"></v-progress-circular>
                 </span>

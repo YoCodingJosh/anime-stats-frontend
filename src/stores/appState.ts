@@ -27,8 +27,8 @@ export const useAppStateStore = defineStore('appState', () => {
     }
   });
 
-  const shouldShowAlertForSystemStatus = computed(() => {
-    return !malAvailable.value || !backendAvailable.value;
+  const isSystemOperational = computed(() => {
+    return malAvailable.value && backendAvailable.value;
   });
 
   return {
@@ -37,6 +37,6 @@ export const useAppStateStore = defineStore('appState', () => {
     backendAvailable,
     setBackendAvailable,
     systemStatus,
-    shouldShowAlertForSystemStatus,
+    isSystemOperational,
   };
 });

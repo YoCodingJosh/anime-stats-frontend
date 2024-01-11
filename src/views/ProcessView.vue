@@ -44,7 +44,7 @@ onMounted(async () => {
       <v-col></v-col>
       <v-col>
         <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
-        <p>{{ userDataStore.username }}</p>
+        <p>Hey {{ userDataStore.username }}!</p>
         <div v-if="isLoading" class="d-flex flex-column justify-center align-center">
           <h1 class="my-3">Processing data...</h1>
           <v-progress-circular indeterminate></v-progress-circular>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import { useUserDataStore } from '@/stores/userData';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,9 +21,24 @@ const router = createRouter({
     {
       path: '/process',
       name: 'process',
-      component: () => import('../views/ProcessView.vue')
+      component: () => import('../views/ProcessView.vue'),
+      beforeEnter: (to, from, next) => {
+        const userStore = useUserDataStore();
+
+        if (userStore.userId) {
+          next();
+        } else {
+          // TODO: show a toast or something
+          next('/');
+        }
+      }
     },
-  ]
+    {
+      path: '/results',
+      name: 'results',
+      component: () => import('../views/ResultsView.vue'),
+    }
+  ],
 });
 
 export default router;
