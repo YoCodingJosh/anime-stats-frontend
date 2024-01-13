@@ -83,13 +83,13 @@ const start = async () => {
     <main>
       <v-alert v-if="!appStateStore.isSystemOperational" :text="appStateStore.systemStatus" type="error"></v-alert>
       <div class="d-flex align-center flex-column">
-        <v-card width="450">
+        <v-card width="auto">
           <template v-slot:title>
             Let's do this!
           </template>
 
           <template v-slot:subtitle>
-            Enter your username and let's start crunching some numbers!
+            Enter your username and let's crunch some numbers!
           </template>
 
           <template v-slot:text>
