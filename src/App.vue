@@ -114,8 +114,6 @@ export default {
 
       <v-app-bar-title>CodingJosh's Anime Stats</v-app-bar-title>
 
-      <v-spacer />
-
       <v-menu transition="slide-y-transition" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn icon v-bind="props">
