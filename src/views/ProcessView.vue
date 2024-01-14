@@ -41,7 +41,7 @@ onMounted(async () => {
 <template>
   <v-container fill-height>
     <v-row align="center" justify="center">
-      <v-col></v-col>
+      <!-- <v-col></v-col> -->
       <v-col>
         <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
         <p>Hey {{ userDataStore.username }}!</p>
