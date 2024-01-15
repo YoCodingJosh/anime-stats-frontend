@@ -166,51 +166,7 @@ export default {
       <RouterView />
     </v-main>
 
-    <!-- <v-footer border>
-      <v-row justify="space-around" no-gutters>
-        <v-col class="text-center">
-          <v-dialog transition="dialog-bottom-transition" width="auto">
-            <template v-slot:activator="{ props }">
-              <v-btn v-bind="props">Privacy Policy</v-btn>
-            </template>
-            <template v-slot:default="{ isActive }">
-              <v-card>
-                <v-toolbar color="primary" title="Privacy Policy"></v-toolbar>
-                <v-card-text>
-                  <div class="text-h2 pa-12">TODO</div>
-                </v-card-text>
-                <v-card-actions class="justify-end">
-                  <v-btn variant="text" @click="isActive.value = false">Close</v-btn>
-                </v-card-actions>
-              </v-card>
-            </template>
-          </v-dialog>
-        </v-col>
-        <v-col class="text-center">
-          <v-dialog transition="dialog-bottom-transition" width="auto">
-            <template v-slot:activator="{ props }">
-              <v-btn v-bind="props">Terms of Service</v-btn>
-            </template>
-            <template v-slot:default="{ isActive }">
-              <v-card>
-                <v-toolbar color="primary" title="Terms of Service"></v-toolbar>
-                <v-card-text>
-                  <div class="text-h2 pa-12">TODO</div>
-                </v-card-text>
-                <v-card-actions class="justify-end">
-                  <v-btn variant="text" @click="isActive.value = false">Close</v-btn>
-                </v-card-actions>
-              </v-card>
-            </template>
-          </v-dialog>
-        </v-col>
-        <v-col class="text-center mt-4" cols="12">
-          &copy; {{ new Date().getFullYear() }} CodingJosh
-        </v-col>
-      </v-row>
-    </v-footer> -->
-
-    <v-footer class="bg-grey-lighten-1 mt-16" absolute inset app height="100">
+    <v-footer border absolute inset app height="100">
       <v-row justify="center" no-gutters>
         <v-spacer></v-spacer>
         <v-dialog transition="dialog-bottom-transition" width="auto">

@@ -93,12 +93,12 @@ const start = async () => {
           </template>
 
           <template v-slot:text>
-            <v-form @submit.prevent>
+            <v-form @submit.prevent :disabled="loading || !appStateStore.isSystemOperational">
               <p v-if="isSubmitted && error" class="mb-4 text-red-lighten-1">{{ error }}</p>
               <v-text-field v-model="username" label="MyAnimeList Username" outlined dense placeholder="CodingJosh"
                 :rules="rules"></v-text-field>
               <v-btn type="submit" block class="mt-2" color="indigo-darken-1" size="x-large" variant="flat"
-                :disabled="loading || !appStateStore.isSystemOperational" @click="async () => start()">
+                @click="async () => start()">
                 <span v-if="loading">
                   <v-progress-circular indeterminate color="white"></v-progress-circular>
                 </span>
