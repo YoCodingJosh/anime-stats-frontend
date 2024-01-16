@@ -41,12 +41,11 @@ onMounted(async () => {
 <template>
   <v-container fill-height>
     <v-row align="center" justify="center">
-      <!-- <v-col></v-col> -->
       <v-col>
         <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
         <p>Hey {{ userDataStore.username }}!</p>
         <div v-if="isLoading" class="d-flex flex-column justify-center align-center">
-          <h1 class="my-3">Processing data...</h1>
+          <h1 class="my-3">Processing...</h1>
           <v-progress-circular indeterminate></v-progress-circular>
         </div>
         <div v-else-if="isUserListPrivate" class="d-flex flex-column justify-center align-center">
@@ -56,9 +55,10 @@ onMounted(async () => {
         </div>
         <div v-else>
           <h1 class="my-3">TODO:</h1>
-          <anime-gif image-key="yuyushiki-what"></anime-gif>
+          <anime-gif image-key="yuyushiki-what" :show-anime-details="false"></anime-gif>
         </div>
       </v-col>
+      <v-col></v-col>
       <v-col></v-col>
     </v-row>
   </v-container>

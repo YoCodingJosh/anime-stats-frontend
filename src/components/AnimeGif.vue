@@ -58,6 +58,20 @@ const props = defineProps({
     required: false,
     default: true,
   },
+
+  /**
+   * Whether to show the anime details on hover or not.
+   *
+   * Note: This will only work if `showAnimeDetails` is true.
+   * Note: This will cause an additional request to MyAnimeList/Jikan. Only one request if combined with `showAnimeIcon` ;)
+   * Note: The data is cached for 24 hours.
+   * Note: This will cause the details to be hidden by default.
+   */
+  showAnimeDetailsOnHover: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const imageUrl = ref('');
@@ -164,34 +178,36 @@ onMounted(() => {
 
 <template>
   <v-card :max-width="imageWidth" :loading="isLoading" class="anime-gif-card">
-    <v-img :src="`/gifs/${imageUrl}`" :max-width="imageWidth" :max-height="imageHeight"></v-img>
-    <v-card-title>
-      <v-row>
-        <v-col cols="9">
-          <a :href="animeMalUrl" class="anime-title" target="_blank" rel="noopener noreferrer">{{ animeTitle }}</a>
-        </v-col>
-        <v-col class="d-flex" cols="3">
-          <v-spacer />
-          <span class="anime-score">{{ animeScore }}</span>
-          <v-icon>mdi-star</v-icon>
-        </v-col>
-      </v-row>
-    </v-card-title>
+    <v-img :src="`/gifs/${imageUrl}`" :max-width="imageWidth" :max-height="imageHeight" :alt="animeTitle"></v-img>
+    <span v-if="showAnimeDetails">
+      <v-card-title>
+        <v-row>
+          <v-col cols="9">
+            <a :href="animeMalUrl" class="anime-title" target="_blank" rel="noopener noreferrer">{{ animeTitle }}</a>
+          </v-col>
+          <v-col class="d-flex" cols="3">
+            <v-spacer />
+            <span class="anime-score">{{ animeScore }}</span>
+            <v-icon>mdi-star</v-icon>
+          </v-col>
+        </v-row>
+      </v-card-title>
 
-    <v-card-text>
-      <v-row>
-        <v-col cols="12" md="9">
-          <v-chip-group disabled v-if="showAnimeDetails">
-            <v-chip size="small" v-for="genre in animeGenres" :key="genre">{{ genre }}</v-chip>
-          </v-chip-group>
-        </v-col>
-        <v-col class="d-flex" cols="12" md="3">
-          <v-spacer />
-          <v-btn v-if="showWatchButton" :href="animeWatchUrl" target="_blank" variant="tonal" size="large" icon
-            outlined><v-icon size="large">mdi-movie-open-play</v-icon></v-btn>
-        </v-col>
-      </v-row>
-    </v-card-text>
+      <v-card-text>
+        <v-row>
+          <v-col cols="12" md="9">
+            <v-chip-group disabled v-if="showAnimeDetails">
+              <v-chip size="small" v-for="genre in animeGenres" :key="genre">{{ genre }}</v-chip>
+            </v-chip-group>
+          </v-col>
+          <v-col class="d-flex" cols="12" md="3">
+            <v-spacer />
+            <v-btn v-if="showWatchButton" :href="animeWatchUrl" target="_blank" variant="tonal" size="large" icon
+              outlined><v-icon size="large">mdi-movie-open-play</v-icon></v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </span>
 
     <v-card-subtitle>
       &copy; {{ animeCopyright }}
