@@ -182,10 +182,11 @@ onMounted(() => {
     <span v-if="showAnimeDetails">
       <v-card-title>
         <v-row>
-          <v-col cols="9">
+          <v-col cols="2" v-if="showAnimeIcon"><v-img :src="animeImageUrl"></v-img></v-col>
+          <v-col cols="8">
             <a :href="animeMalUrl" class="anime-title" target="_blank" rel="noopener noreferrer">{{ animeTitle }}</a>
           </v-col>
-          <v-col class="d-flex" cols="3">
+          <v-col class="d-flex" cols="2" v-if="showAnimeDetails">
             <v-spacer />
             <span class="anime-score">{{ animeScore }}</span>
             <v-icon>mdi-star</v-icon>

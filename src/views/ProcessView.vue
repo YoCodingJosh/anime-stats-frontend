@@ -12,6 +12,8 @@ const router = useRouter();
 const isLoading = ref(true);
 const isUserListPrivate = ref(false);
 
+const loadingMessage = ref('Processing...');
+
 onMounted(async () => {
   if (!userDataStore.username) {
     // TODO: send a toast message
@@ -19,7 +21,7 @@ onMounted(async () => {
     return;
   }
 
-  fetch(`${import.meta.env.VITE_BACKEND_URL}/api/${userDataStore.username}/raw-data`)
+  const rawData = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/${userDataStore.username}/raw-data`)
     .then((response) => {
       if (!response.ok) {
         if (response.status === 403) {
@@ -32,9 +34,33 @@ onMounted(async () => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-      isLoading.value = false;
+      loadingMessage.value = 'Crunching stats...';
+
+      return data;
     });
+
+  console.log("Raw data: ", rawData);
+
+  const stats = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/${userDataStore.username}/stats`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(rawData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Something went wrong');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      isLoading.value = false;
+
+      return data;
+    });
+
+  console.log("Stats: ", stats);
 });
 </script>
 
@@ -45,7 +71,7 @@ onMounted(async () => {
         <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
         <p>Hey {{ userDataStore.username }}!</p>
         <div v-if="isLoading" class="d-flex flex-column justify-center align-center">
-          <h1 class="my-3">Processing...</h1>
+          <h1 class="my-3">{{ loadingMessage }}</h1>
           <v-progress-circular indeterminate></v-progress-circular>
         </div>
         <div v-else-if="isUserListPrivate" class="d-flex flex-column justify-center align-center">
@@ -55,7 +81,7 @@ onMounted(async () => {
         </div>
         <div v-else>
           <h1 class="my-3">TODO:</h1>
-          <anime-gif image-key="yuyushiki-what" :show-anime-details="false"></anime-gif>
+          <anime-gif image-key="yuyushiki-what" :show-anime-details="true"></anime-gif>
         </div>
       </v-col>
       <v-col></v-col>

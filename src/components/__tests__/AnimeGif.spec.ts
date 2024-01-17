@@ -111,8 +111,6 @@ describe('AnimeGif.vue', () => {
 
     await flushPromises();
 
-    console.log(wrapper.html());
-
     expect(global.fetch).toHaveBeenCalledTimes(1);
 
     expect(wrapper.find('.anime-score').text()).toBe('7.35');
