@@ -58,20 +58,6 @@ const props = defineProps({
     required: false,
     default: true,
   },
-
-  /**
-   * Whether to show the anime details on hover or not.
-   *
-   * Note: This will only work if `showAnimeDetails` is true.
-   * Note: This will cause an additional request to MyAnimeList/Jikan. Only one request if combined with `showAnimeIcon` ;)
-   * Note: The data is cached for 24 hours.
-   * Note: This will cause the details to be hidden by default.
-   */
-  showAnimeDetailsOnHover: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
 });
 
 const imageUrl = ref('');

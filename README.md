@@ -1,5 +1,7 @@
 # anime-stats-frontend
 
+Backend repo: https://github.com/YoCodingJosh/anime-stats-backend
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
