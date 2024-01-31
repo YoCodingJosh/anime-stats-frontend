@@ -2,11 +2,9 @@
 </script>
 
 <template>
-  <v-container>
-    <div class="about">
-      <p>You've watched X hours of anime!</p>
-    </div>
-  </v-container>
+  <v-card>
+
+  </v-card>
 </template>
 
 <style scoped>

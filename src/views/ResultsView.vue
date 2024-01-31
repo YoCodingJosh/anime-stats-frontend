@@ -4,7 +4,6 @@ import { useUserDataStore } from '../stores/userData';
 
 const userDataStore = useUserDataStore();
 
-// username's possessive form (be sure to think about the edge case of usernames ending with s)
 const usernamePossessive = computed(() => {
   if (userDataStore.username === '') {
     return '';

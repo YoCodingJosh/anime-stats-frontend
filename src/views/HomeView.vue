@@ -69,7 +69,7 @@ const start = async () => {
   userDataStore.setJoinedDate(userData.data.joined);
   userDataStore.setProfilePictureUrl(userData.data.images.jpg.image_url ?? "https://cdn.myanimelist.net/images/kaomoji_mal_white.png");
 
-  userDataStore.setFetchedTimestamp(Math.floor(Date.now() / 1000));
+  userDataStore.setFetchedTimestamp(new Date().getTime());
 
   router.push(`/process`);
 };

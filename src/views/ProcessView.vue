@@ -3,10 +3,12 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useUserDataStore } from '@/stores/userData';
+import { useStatsDataStore } from '@/stores/statsData';
 
 import AnimeGif from '@/components/AnimeGif.vue';
 
 const userDataStore = useUserDataStore();
+const statsDataStore = useStatsDataStore();
 const router = useRouter();
 
 const isLoading = ref(true);
@@ -56,6 +58,15 @@ onMounted(async () => {
     })
     .then((data) => {
       isLoading.value = false;
+
+      statsDataStore.setFetchedTimestamp(new Date().getTime());
+      statsDataStore.setAvailableStats(data.availableStats);
+
+      const stats = data.stats;
+
+      Object.keys(stats).forEach((key) => {
+        statsDataStore.setStatsData(key, stats[key]);
+      });
 
       return data;
     });
