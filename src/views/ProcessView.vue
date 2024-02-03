@@ -72,6 +72,8 @@ onMounted(async () => {
     });
 
   console.log("Stats: ", stats);
+
+  router.push('/results');
 });
 </script>
 
