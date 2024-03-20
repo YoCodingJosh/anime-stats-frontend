@@ -92,10 +92,6 @@ onMounted(async () => {
           <p>Change your list privacy settings to public and try again</p>
           <v-btn class="my-6" color="primary" @click="router.push('/')">Go back</v-btn>
         </div>
-        <div v-else>
-          <h1 class="my-3">TODO:</h1>
-          <anime-gif image-key="yuyushiki-what" :show-anime-details="true"></anime-gif>
-        </div>
       </v-col>
       <v-col></v-col>
       <v-col></v-col>

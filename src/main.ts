@@ -8,6 +8,9 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import 'vuetify/styles';
 import {installVuetify} from '@/plugins/vuetify';
 
+// ApexCharts
+import VueApexCharts from "vue3-apexcharts";
+
 import App from './App.vue';
 import router from './router';
 
@@ -19,5 +22,7 @@ pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 app.use(router);
 installVuetify(app);
+
+app.use(VueApexCharts);
 
 app.mount('#app');
