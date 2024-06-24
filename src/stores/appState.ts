@@ -21,7 +21,7 @@ export const useAppStateStore = defineStore('appState', () => {
     } else if (!malAvailable.value && backendAvailable.value) {
       return 'MyAnimeList is down';
     } else if (malAvailable.value && !backendAvailable.value) {
-      return 'Backend is down';
+      return 'Backend service is down';
     } else {
       return 'MAL and backend are down';
     }
