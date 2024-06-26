@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+
 import { useUserDataStore } from '../stores/userData';
+
 import StatusDonut from '@/stats/StatusDonut.vue';
+import WatchTime from '@/stats/WatchTime.vue';
 
 const userDataStore = useUserDataStore();
 
@@ -20,12 +23,13 @@ const usernamePossessive = computed(() => {
 
 <template>
   <v-container>
-    <div class="about">
-      <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
+    <div class="results">
+      <v-avatar :image="userDataStore.profilePictureUrl" size="48"></v-avatar>
 
       <h1>Here is {{ usernamePossessive }} anime stats!</h1>
 
       <status-donut />
+      <watch-time />
     </div>
   </v-container>
 </template>

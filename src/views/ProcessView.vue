@@ -5,8 +5,6 @@ import { useRouter } from 'vue-router';
 import { useUserDataStore } from '@/stores/userData';
 import { useStatsDataStore } from '@/stores/statsData';
 
-import AnimeGif from '@/components/AnimeGif.vue';
-
 const userDataStore = useUserDataStore();
 const statsDataStore = useStatsDataStore();
 const router = useRouter();
@@ -81,7 +79,7 @@ onMounted(async () => {
   <v-container fill-height>
     <v-row align="center" justify="center">
       <v-col>
-        <v-avatar :image="userDataStore.profilePictureUrl"></v-avatar>
+        <v-avatar :image="userDataStore.profilePictureUrl" size="48"></v-avatar>
         <p>Hey {{ userDataStore.username }}!</p>
         <div v-if="isLoading" class="d-flex flex-column justify-center align-center">
           <h1 class="my-3">{{ loadingMessage }}</h1>

@@ -97,7 +97,7 @@ export default {
 
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" class="bg-deep-purple-lighten-1" theme="dark">
+    <v-navigation-drawer v-model="drawer" class="bg-deep-purple-lighten-1" theme="dark" temporary>
       <v-list color="transparent">
         <v-list-item link title="Home" to="/"></v-list-item>
         <v-list-item link title="About" to="/about"></v-list-item>
